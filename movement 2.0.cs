@@ -2,16 +2,14 @@ using UnityEngine;
 
 public class movement2 : MonoBehaviour 
 {
-
 	CharacterController controller;
-    //velocidade e gravidade
-    public float Speed = 12f;
-   
+
+	public float Speed = 12f;
+
 	public float gravity = -9.81f;
     
-	
 	Vector3 velocity;
-  
+
 	public Transform groundCheck;
     
 	public float groundDistance =0.4f;
@@ -19,7 +17,7 @@ public class movement2 : MonoBehaviour
 	public LayerMask groundMask;
     
 	bool isGrounded;
-     
+
 	Rigidbody m_Rigidbody;
 
 	
@@ -27,28 +25,9 @@ public class movement2 : MonoBehaviour
 	{
 		controller = GetComponent<CharacterController>();
         
-		 m_Rigidbody = GetComponent <Rigidbody>();
+		m_Rigidbody = GetComponent <Rigidbody>();
 	}
 
-	void FixedUpdate() 
- 	{ 
-         
-
-       if( Input.GetButton("jump"))
-			
-			{
-			m_Rigidbody.AddForce(transform.up * m_Thrust);
-
-			}
-  
-	}		
-		
-	
-	void Start () 
-	{
-	
-	}
-	
 	void Update () 
 	{
 		//controle
@@ -58,10 +37,7 @@ public class movement2 : MonoBehaviour
         
         Vector3  move = transform.right * x + transform.forward * z;
 		
-	
-        
         controller.Move(move * Speed * Time.deltaTime);
-
 
         velocity.y += gravity * Time.deltaTime;
         
@@ -73,7 +49,13 @@ public class movement2 : MonoBehaviour
 		{
         	velocity.y = -2f;
 		}
-		
+	}
 
+	void FixedUpdate() 
+	{ 
+    	if( Input.GetButton("jump"))	
+		{
+			m_Rigidbody.AddForce(transform.up * m_Thrust);
 		}
+	}
 }
